@@ -15,8 +15,9 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Fix the typo here
+    e.preventDefault();
     try {
+      // withCredentials:true is for allowing the browser to include credentials (such as cookies) with cross-origin requests.
       await axios.post("/login", { email, password }, {withCredentials: true});
       alert("Login Successful");
     } catch (e) {

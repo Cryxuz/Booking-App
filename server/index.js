@@ -9,7 +9,10 @@ import jwt from 'jsonwebtoken'
 const app = express()
 dotenv.config()
 
+// genSalt function in the bcrypt library is specifically designed to generate a random salt that can be used in the process of hashing a password.
 const bcryptSalt = bcrypt.genSaltSync(10)
+
+// transfer this to env
 const jwtSecret = 'abcdefg'
 
 app.use(express.json())
@@ -29,7 +32,7 @@ app.get('/test', (req,res) => {
 app.post('/register', async (req,res) => {
   const {name, email, password} = req.body
   try {
-
+    // creating new user to the database and hashing its password
   const user = await User.create({
     name,
     email,
@@ -47,11 +50,14 @@ app.post('/login', async (req,res) => {
   const {email, password} = req.body
   const user = await User.findOne({email})
   if(user) {
-    // checking the password is correct
+    // checking the password is correct comparing entered password to hashed passowrd
     const passOk = bcrypt.compareSync(password, user.password)
 
     if (passOk) {
+      // This line generates a JSON Web Token (JWT) using the jwt.sign method. The token contains information about the user, such as their email and user ID. 
       const token = jwt.sign({ email: user.email, id: user._id }, jwtSecret);
+      // this line is setting a secure, HTTP-only cookie named 'token' in the HTTP response
+      // this is the line that generates cookies in http response header
       res.cookie('token', token, { httpOnly: true, secure: true }).json('password correct');
     } else {
       res.json('password incorrect');
