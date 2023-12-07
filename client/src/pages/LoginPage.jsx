@@ -17,7 +17,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Fix the typo here
     try {
-      await axios.post("/login", { email, password });
+      await axios.post("/login", { email, password }, {withCredentials: true});
       alert("Login Successful");
     } catch (e) {
       alert("Login Failed");

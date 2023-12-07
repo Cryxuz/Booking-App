@@ -10,9 +10,14 @@ const app = express()
 dotenv.config()
 
 const bcryptSalt = bcrypt.genSaltSync(10)
+const jwtSecret = 'abcdefg'
+
 app.use(express.json())
 const PORT = 3000
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}))
 
 
 mongoose.connect(process.env.MONGO_URL)
@@ -44,15 +49,16 @@ app.post('/login', async (req,res) => {
   if(user) {
     // checking the password is correct
     const passOk = bcrypt.compareSync(password, user.password)
+
     if (passOk) {
-      jwt.sign({})
-      res.cookie('token', '').json('password correct')
+      const token = jwt.sign({ email: user.email, id: user._id }, jwtSecret);
+      res.cookie('token', token, { httpOnly: true, secure: true }).json('password correct');
     } else {
-      res.json('password incorrect')
+      res.json('password incorrect');
     }
   } else {
-    res.status(400).json('user not found')
+    res.status(400).json('user not found');
   }
-})
+});
 
 app.listen(PORT)
