@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import User from './models/User.js'
 
 const app = express()
 app.use(express.json())
@@ -16,6 +18,11 @@ app.get('/test', (req,res) => {
 
 app.post('/register', (req,res) => {
   const {name, email, password} = req.body
+  User.create({
+    name,
+    email,
+    password,
+  })
   res.json(name, email, password)
 })
 
