@@ -22,7 +22,7 @@ app.use(cors({
   credentials: true,
 }))
 
-
+// stored in .env file for security
 mongoose.connect(process.env.MONGO_URL)
 
 app.get('/test', (req,res) => {
