@@ -22,12 +22,30 @@ app.get('/test', (req,res) => {
 
 app.post('/register', async (req,res) => {
   const {name, email, password} = req.body
+  try {
+
   const user = await User.create({
     name,
     email,
     password: bcrypt.hashSync(password, bcryptSalt),
   })
   res.json(user)
+  } catch(e) {
+    res.status(400).json(e)
+    console.log(e)
+  }
+
+})
+
+app.post('/login', async (req,res) => {
+  const {email, password} = req.body
+  const user = await User.findOne({email})
+  if(user) {
+    const passOk = bcrypt.compareSync(password, user.password)
+    res.json('pass ok')
+  } else {
+    res.status(400).json('pass not ok')
+  }
 })
 
 app.listen(PORT)
