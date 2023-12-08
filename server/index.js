@@ -58,7 +58,7 @@ app.post('/login', async (req,res) => {
       const token = jwt.sign({ email: user.email, id: user._id }, jwtSecret);
       // this line is setting a secure, HTTP-only cookie named 'token' in the HTTP response
       // this is the line that generates cookies in http response header
-      res.cookie('token', token, { httpOnly: true, secure: true }).json('password correct');
+      res.cookie('token', token).json(user);
     } else {
       res.json('password incorrect');
     }
