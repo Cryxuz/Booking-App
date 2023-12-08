@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [redirect, setRedirect] = useState(false)
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -20,11 +20,14 @@ const LoginPage = () => {
       // withCredentials:true is for allowing the browser to include credentials (such as cookies) with cross-origin requests.
       await axios.post("/login", { email, password }, {withCredentials: true});
       alert("Login Successful");
+      setRedirect(true)
     } catch (e) {
       alert("Login Failed");
     }
   };
-
+  if (redirect) {
+    return <Navigate to={'/'} />
+  }
   return (
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
