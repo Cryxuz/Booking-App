@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import User from './models/User.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 dotenv.config()
@@ -16,6 +17,7 @@ const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'abcdefg'
 
 app.use(express.json())
+app.use(cookieParser())
 const PORT = 3000
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -58,7 +60,7 @@ app.post('/login', async (req,res) => {
       const token = jwt.sign({ email: user.email, id: user._id }, jwtSecret);
       // this line is setting a secure, HTTP-only cookie named 'token' in the HTTP response
       // this is the line that generates cookies in http response header
-      res.cookie('token', token).json(user);
+      res.cookie('token', token, { httpOnly: true, secure: false }).json(user);
     } else {
       res.json('password incorrect');
     }
@@ -66,5 +68,9 @@ app.post('/login', async (req,res) => {
     res.status(400).json('user not found');
   }
 });
-
+ 
+app.get('/profile', (req,res) => {
+  const {token} = req.cookies
+  res.json({token})
+})
 app.listen(PORT)

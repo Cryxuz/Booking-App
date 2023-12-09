@@ -7,10 +7,11 @@ import RegisterPage from './pages/RegisterPage'
 import axios from 'axios'
 import { UserContextProvider } from './UserContext'
 
+
 axios.defaults.baseURL = 'http://localhost:3000'
 
 function App() {
-  
+
   return (
     <UserContextProvider>
       <Routes>
