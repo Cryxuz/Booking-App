@@ -57,7 +57,11 @@ app.post('/login', async (req,res) => {
 
     if (passOk) {
       // This line generates a JSON Web Token (JWT) using the jwt.sign method. The token contains information about the user, such as their email and user ID. 
-      const token = jwt.sign({ email: user.email, id: user._id }, jwtSecret);
+      const token = jwt.sign({ 
+        email: user.email, 
+        id: user._id, 
+        name: user.name
+      }, jwtSecret);
       // this line is setting a secure, HTTP-only cookie named 'token' in the HTTP response
       // this is the line that generates cookies in http response header
       res.cookie('token', token, { httpOnly: true, secure: false }).json(user);
@@ -72,9 +76,10 @@ app.post('/login', async (req,res) => {
 app.get('/profile', (req,res) => {
   const {token} = req.cookies
   if (token) {
-    jwt.verify(token, jwtSecret, {}, (err, userData) => {
-      if(err) throw err
-      res.json(userData)
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if(err) throw err;
+      const {name, email, _id} = await User.findById(userData.id)
+      res.json({name, email, _id})
     })
   } else {
     res.json(null)
