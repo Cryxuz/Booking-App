@@ -22,7 +22,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       // withCredentials:true is for allowing the browser to include credentials (such as cookies) with cross-origin requests.
-      const data = await axios.post("/login", { email, password }, {withCredentials: true});
+      const {data} = await axios.post("/login", { email, password }, {withCredentials: true});
       setUser(data)
       alert("Login Successful");
       setRedirect(true)
