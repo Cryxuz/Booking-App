@@ -7,10 +7,10 @@ export const Header = () => {
   return (
     <div>
        <header className=' flex justify-between'>
-          <a href="" className="flex items-center">
+          <Link to={'/'} className="flex items-center">
           <img className="w-[56px] h-[32px] mr-1" src="/images/logo.png" alt="" />
           <span className='font-bold text-xl'>Nestify</span>
-          </a>
+          </Link>
         
         {/* search */}
           <div className='flex gap-4 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-gray-300'>
