@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const PlaceSchema = new mongoose.Schema({
+const placeSchema = new mongoose.Schema({
   title: String,
   address: String,
   photos: [String],
@@ -11,3 +11,7 @@ const PlaceSchema = new mongoose.Schema({
   checkOut: Number,
   maxGuests: Number
 })
+// 'Place' is a mongoDB collection
+const PlaceModel = mongoose.model('Place', placeSchema)
+
+export default PlaceModel
