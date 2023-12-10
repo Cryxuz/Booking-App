@@ -1,4 +1,11 @@
 import { Link, useParams } from 'react-router-dom'
+import wifi from '/icons/wifi.png'
+import parking from '/icons/parking.png'
+import tv from '/icons/tv.png'
+import washer from '/icons/washer.png'
+import pets from '/icons/pets.png'
+import entrance from '/icons/entrance.png'
+
 
 const PlacesPage = () => {
   const {action} = useParams()
@@ -45,7 +52,38 @@ const PlacesPage = () => {
             <textarea className=''></textarea>
             {/* perks */}
             <h2 className=' mt-4 text-2xl' htmlFor='photos'>Perks</h2>
-            
+            <div className='mt-2 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={wifi} alt="" />
+                <span>Wifi</span>
+              </label>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={parking} alt="" />
+                <span>Free parking</span>
+              </label>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={tv} alt="" />
+                <span>Television</span>
+              </label>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={washer} alt="" />
+                <span>Washer</span>
+              </label>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={pets} alt="" />
+                <span>Pets allowed</span>
+              </label>
+              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
+                <input type="checkbox" />
+                <img src={entrance} alt="" />
+                <span>Private Entrance</span>
+              </label>
+            </div>
           </form>
         </div>
       )}
