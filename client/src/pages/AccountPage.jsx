@@ -17,8 +17,9 @@ export const AccountPage = () => {
   async function logout() {
     try {
       await axios.post('/logout')
-      setUser(null)
       setRedirect('/')
+      setUser(null)
+
     } catch (err) {
       console.log(err)
     }
@@ -29,7 +30,7 @@ export const AccountPage = () => {
     return 'Loading...'
   }
 
-  if(ready && !user) {
+  if(ready && !user && !redirect) {
     return <Navigate to={'/login'} />
   }
 
