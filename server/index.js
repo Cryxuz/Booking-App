@@ -86,9 +86,11 @@ app.get('/profile', (req,res) => {
   }
 })
 
-app.post('/logout', (req,res) => {
-  // resetting the cookie
-  res.cookie('token', '').json(true)
-})
+app.post('/logout', (req, res) => {
+
+  // Resetting the token cookie
+  res.cookie('token', '', { expires: new Date(0), httpOnly: true }).json(true);
+  res.json({ success: true });
+});
 
 app.listen(PORT)
