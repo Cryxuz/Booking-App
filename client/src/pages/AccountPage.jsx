@@ -12,9 +12,9 @@ export const AccountPage = () => {
   }
   console.log(subpage)
 
-async function logout() {
-  await axios.post('/logout')
-}
+  async function logout() {
+    await axios.post('/logout')
+  }
 
   if(!ready) {
     return 'Loading...'

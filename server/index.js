@@ -85,4 +85,10 @@ app.get('/profile', (req,res) => {
     res.json(null)
   }
 })
+
+app.post('/logout', (req,res) => {
+  // resetting the cookie
+  res.cookie('token', '').json(true)
+})
+
 app.listen(PORT)
