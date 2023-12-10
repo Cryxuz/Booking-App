@@ -3,12 +3,17 @@ import { UserContext } from "../UserContext.jsx"
 import { Navigate } from "react-router-dom"
 
 export const AccountPage = () => {
-  const {user} = useContext(UserContext)
+  const {ready, user} = useContext(UserContext)
 
-  if(!user) {
+  if(!ready) {
+    return 'Loading...'
+  }
+
+  if(ready && !user) {
     return <Navigate to={'/login'} />
   }
+  
   return (
-    <div>Account for {user.name}</div>
+    <div>Account for {user?.name}</div>
   )
 }
