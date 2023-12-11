@@ -84,6 +84,32 @@ const PlacesPage = () => {
                 <span>Private Entrance</span>
               </label>
             </div>
+            {/* extra info */}
+            <h2 className=' mt-4 text-2xl '>Extra Info</h2>
+            <p className='text-sm text-gray-500'>House rules, etc.</p>
+            <textarea />
+            {/* check in & out */}
+            <h2 className=' mt-4 text-2xl '>Check in & out times</h2>
+            <div className='grid gap-2 sm:grid-cols-3'>
+              {/* check in */}
+              <div>
+                <h3 className='mt-2 -mb-1'>Check in time:</h3>
+                <input type="text" placeholder='14:00'/>
+              </div>
+              {/* check out */}
+              <div>
+                <h3 className='mt-2 -mb-1'>Check out time:</h3>
+                <input type="text" placeholder='11:00'/>
+              </div>
+              {/* max guests */}
+              <div>
+                <h3>Max guests</h3>
+                <input type="text" />
+              </div>
+            </div>  
+            <div className='flex justify-center'>
+              <button className='primary my-4 md:max-w-[50%] '>Save</button>
+            </div>        
           </form>
         </div>
       )}
