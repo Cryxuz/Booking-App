@@ -93,4 +93,8 @@ app.post('/logout', (req, res) => {
   res.json({ success: true });
 });
 
+app.post('/upload-by-link', (req,res) => {
+  const {link} = req.body;
+  
+})
 app.listen(PORT)
