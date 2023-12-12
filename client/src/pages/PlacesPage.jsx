@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-
+import axios from 'axios'
 import { useState } from 'react'
 import Perks from '../Perks'
 
@@ -25,11 +25,15 @@ const PlacesPage = () => {
     return (
       <div>
         {inputHeader(headerText)}
-        
       </div>
     );
   }
   
+  async function addPhotoByLink (evt) {
+    evt.preventDefault()
+    await axios.post('/upload-by-link', {link: photoLink})
+  }
+
   return (
     <div>
       {action !== 'new' && (
@@ -71,7 +75,7 @@ const PlacesPage = () => {
                 onChange={evt => setPhotoLink(evt.target.value)} 
                 type="text" placeholder='Add link or file' 
                 />
-              <button className='bg-gray-200 px-4 rounded-2xl'>Add&nbsp;photo</button>
+              <button onClick={addPhotoByLink} className='bg-gray-200 px-4 rounded-2xl'>Add&nbsp;photo</button>
             </div>
 
             <div className='grid grid-cols-3 mt-2 md:grid-cols-4 lg:grid-cols-6'>

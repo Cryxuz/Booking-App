@@ -6,6 +6,12 @@ import User from './models/User.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
+import imageDownloader from 'image-downloader'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express()
 dotenv.config()
@@ -93,8 +99,16 @@ app.post('/logout', (req, res) => {
   res.json({ success: true });
 });
 
-app.post('/upload-by-link', (req,res) => {
+
+app.post('/upload-by-link', async (req,res) => {
   const {link} = req.body;
-  
+
+  const newName = Date.now() + '.jpg'
+  await imageDownloader.image({
+    url: link,
+    dest: `${__dirname}/uploads/${newName}`
+  })
+  res.json(__dirname + '/uploads/' +newName);
 })
+// 2:57
 app.listen(PORT)
