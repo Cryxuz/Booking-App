@@ -1,4 +1,9 @@
-
+import wifi from '/icons/wifi.png'
+import parking from '/icons/parking.png'
+import tv from '/icons/tv.png'
+import washer from '/icons/washer.png'
+import pets from '/icons/pets.png'
+import entrance from '/icons/entrance.png'
 
 const Perks = ({selected, onChange}) => {
   return (

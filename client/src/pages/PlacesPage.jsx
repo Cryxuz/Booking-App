@@ -1,10 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import wifi from '/icons/wifi.png'
-import parking from '/icons/parking.png'
-import tv from '/icons/tv.png'
-import washer from '/icons/washer.png'
-import pets from '/icons/pets.png'
-import entrance from '/icons/entrance.png'
+
 import { useState } from 'react'
 import Perks from '../Perks'
 
@@ -51,15 +46,31 @@ const PlacesPage = () => {
         <div> 
           <form>
             {/* title */}
-            {preInput('Title', 'My lovely apartment')}
-            <input id='title' type="text" placeholder='Title: My lovely apartment' /> 
+            {preInput('Title')}
+            <input 
+              value={title} 
+              onChange={evt => setTitle(evt.target.value)} 
+              id='title' 
+              type="text" 
+              placeholder='Title: My lovely apartment' 
+            /> 
             {/* address */}
             {preInput('Address')}
-            <input id='address' type="text" placeholder='Address: 123 Fake Street' /> 
+            <input 
+              value={address} 
+              onChange={evt => setAddress(evt.target.value)} 
+              id='address' 
+              type="text" 
+              placeholder='Address: 123 Fake Street' 
+            /> 
             {/* photos */}
             {preInput('Photos')}
             <div className='flex gap-2'>
-              <input type="text" placeholder='Add link or file' />
+              <input 
+                value={photoLink} 
+                onChange={evt => setPhotoLink(evt.target.value)} 
+                type="text" placeholder='Add link or file' 
+                />
               <button className='bg-gray-200 px-4 rounded-2xl'>Add&nbsp;photo</button>
             </div>
 
@@ -73,7 +84,10 @@ const PlacesPage = () => {
             </div>
             {/* description */}
             {preInput('Description')}
-            <textarea className=''></textarea>
+            <textarea 
+              value={description} 
+              onChange={evt => setDescription(evt.target.value)} 
+            />
             {/* perks */}
             {preInput('Perks')}
             <div className='mt-2 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
@@ -82,24 +96,40 @@ const PlacesPage = () => {
             {/* extra info */}
             {preInput('Extra Info')}
             <p className='text-sm text-gray-500'>House rules, etc.</p>
-            <textarea />
+            <textarea 
+              value={extraInfo} 
+              onChange={evt => setExtraInfo(evt.target.value)}
+              />
             {/* check in & out */}
             {preInput('Check in & out times')}
             <div className='grid gap-2 sm:grid-cols-3'>
               {/* check in */}
               <div>
                 <h3 className='mt-2 -mb-1'>Check in time:</h3>
-                <input type="text" placeholder='14:00'/>
+                <input 
+                  value={checkIn} onChange={evt => setCheckIn(evt.target.value)}
+                  type="text" 
+                  placeholder='14:00'
+                />
               </div>
               {/* check out */}
               <div>
                 <h3 className='mt-2 -mb-1'>Check out time:</h3>
-                <input type="text" placeholder='11:00'/>
+                <input
+                  value={checkOut} 
+                  onChange={evt => setCheckOut(evt.target.value)} 
+                  type="text" 
+                  placeholder='11:00'
+                />
               </div>
               {/* max guests */}
               <div>
                 <h3>Max guests</h3>
-                <input type="text" />
+                <input 
+                  value={maxGuests} 
+                  onChange={evt => setMaxGuests(evt.target.value)}
+                  type="text" 
+                />
               </div>
             </div>  
             <div className='flex justify-center'>
