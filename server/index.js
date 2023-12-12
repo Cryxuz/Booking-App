@@ -22,6 +22,8 @@ const bcryptSalt = bcrypt.genSaltSync(10)
 // transfer this to env
 const jwtSecret = 'abcdefg'
 
+app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
+
 app.use(express.json())
 app.use(cookieParser())
 const PORT = 3000
@@ -103,12 +105,12 @@ app.post('/logout', (req, res) => {
 app.post('/upload-by-link', async (req,res) => {
   const {link} = req.body;
   console.log(link)
-  const newName = Date.now() + '.jpg'
+  const newName = 'photo' + Date.now() + '.jpg'
   await imageDownloader.image({
     url: link,
     dest: `${__dirname}/uploads/${newName}`
   })
-  res.json(__dirname + '/uploads/' +newName);
+  res.json(newName);
 })
 // 2:57
 app.listen(PORT)
