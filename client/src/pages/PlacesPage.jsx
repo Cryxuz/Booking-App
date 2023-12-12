@@ -31,7 +31,12 @@ const PlacesPage = () => {
   
   async function addPhotoByLink (evt) {
     evt.preventDefault()
-    await axios.post('/upload-by-link', {link: photoLink})
+    try {
+      const response = await axios.post('/upload-by-link', {link: photoLink})
+      console.log('response from server:', response.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
