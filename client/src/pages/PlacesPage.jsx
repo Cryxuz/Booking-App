@@ -128,7 +128,7 @@ const PlacesPage = () => {
                 <input 
                   value={maxGuests} 
                   onChange={evt => setMaxGuests(evt.target.value)}
-                  type="text" 
+                  type="number" 
                 />
               </div>
             </div>  
