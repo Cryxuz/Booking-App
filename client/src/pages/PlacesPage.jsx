@@ -6,6 +6,7 @@ import washer from '/icons/washer.png'
 import pets from '/icons/pets.png'
 import entrance from '/icons/entrance.png'
 import { useState } from 'react'
+import Perks from '../Perks'
 
 
 const PlacesPage = () => {
@@ -19,9 +20,21 @@ const PlacesPage = () => {
   const [extraInfo, setExtraInfo] = useState('')
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
-  const [maxGuests, setMaxGuests] = useState('')
+  const [maxGuests, setMaxGuests] = useState(1)
 
-
+  function inputHeader(text) {
+    return <h2 className='mt-4 text-2xl' htmlFor='title'>{text}</h2>;
+  }
+  
+  function preInput(headerText) {
+    return (
+      <div>
+        {inputHeader(headerText)}
+        
+      </div>
+    );
+  }
+  
   return (
     <div>
       {action !== 'new' && (
@@ -38,14 +51,13 @@ const PlacesPage = () => {
         <div> 
           <form>
             {/* title */}
-            <h2 className=' mt-4 text-2xl' htmlFor='title'>Title</h2>
-            <input id='title' type="text" placeholder='Title: My lovely apartment' />
+            {preInput('Title', 'My lovely apartment')}
+            <input id='title' type="text" placeholder='Title: My lovely apartment' /> 
             {/* address */}
-            <h2 className=' mt-4 text-2xl' htmlFor='address'>Address</h2>
-            <input id='address' type="text" placeholder='Address: 123 Fake Street' />
+            {preInput('Address')}
+            <input id='address' type="text" placeholder='Address: 123 Fake Street' /> 
             {/* photos */}
-            <h2 className=' mt-4 text-2xl' htmlFor='photos'>Photos</h2>
-
+            {preInput('Photos')}
             <div className='flex gap-2'>
               <input type="text" placeholder='Add link or file' />
               <button className='bg-gray-200 px-4 rounded-2xl'>Add&nbsp;photo</button>
@@ -60,48 +72,19 @@ const PlacesPage = () => {
               </button>
             </div>
             {/* description */}
-            <h2 className=' mt-4 text-2xl' htmlFor='photos'>Description</h2>
+            {preInput('Description')}
             <textarea className=''></textarea>
             {/* perks */}
-            <h2 className=' mt-4 text-2xl' htmlFor='photos'>Perks</h2>
+            {preInput('Perks')}
             <div className='mt-2 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={wifi} alt="" />
-                <span>Wifi</span>
-              </label>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={parking} alt="" />
-                <span>Free parking</span>
-              </label>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={tv} alt="" />
-                <span>Television</span>
-              </label>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={washer} alt="" />
-                <span>Washer</span>
-              </label>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={pets} alt="" />
-                <span>Pets allowed</span>
-              </label>
-              <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-                <input type="checkbox" />
-                <img src={entrance} alt="" />
-                <span>Private Entrance</span>
-              </label>
+              <Perks selected={perks} onChange={setPerks} />
             </div>
             {/* extra info */}
-            <h2 className=' mt-4 text-2xl '>Extra Info</h2>
+            {preInput('Extra Info')}
             <p className='text-sm text-gray-500'>House rules, etc.</p>
             <textarea />
             {/* check in & out */}
-            <h2 className=' mt-4 text-2xl '>Check in & out times</h2>
+            {preInput('Check in & out times')}
             <div className='grid gap-2 sm:grid-cols-3'>
               {/* check in */}
               <div>
