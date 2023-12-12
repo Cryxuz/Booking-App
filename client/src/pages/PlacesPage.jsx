@@ -5,11 +5,23 @@ import tv from '/icons/tv.png'
 import washer from '/icons/washer.png'
 import pets from '/icons/pets.png'
 import entrance from '/icons/entrance.png'
+import { useState } from 'react'
 
 
 const PlacesPage = () => {
   const {action} = useParams()
-  
+  const [title, setTitle] = useState('')
+  const [address, setAddress] = useState('')
+  const [addedPhotos, setAddedPhotos] = useState([])
+  const [photoLink, setPhotoLink] = useState('')
+  const [description, setDescription] = useState('')
+  const [perks, setPerks] = useState([])
+  const [extraInfo, setExtraInfo] = useState('')
+  const [checkIn, setCheckIn] = useState('')
+  const [checkOut, setCheckOut] = useState('')
+  const [maxGuests, setMaxGuests] = useState('')
+
+
   return (
     <div>
       {action !== 'new' && (
