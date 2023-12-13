@@ -81,18 +81,26 @@ app.post('/login', async (req,res) => {
   }
 });
  
-app.get('/profile', (req,res) => {
-  const {token} = req.cookies
+app.get('/profile', async (req, res) => {
+  const { token } = req.cookies;
   if (token) {
-    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-      if(err) throw err;
-      const {name, email, _id} = await User.findById(userData.id)
-      res.json({name, email, _id})
-    })
+    try {
+      const userData = jwt.verify(token, jwtSecret);
+      const user = await User.findOne({ _id: userData.id });
+
+      if (user) {
+        const { name, email, _id } = user;
+        res.json({ name, email, _id });
+      } else {
+        res.json(null); // User not found
+      }
+    } catch (err) {
+      res.json(null); // Token verification failed or expired
+    }
   } else {
-    res.json(null)
+    res.json(null); // No token in cookies
   }
-})
+});
 
 app.post('/logout', (req, res) => {
 
