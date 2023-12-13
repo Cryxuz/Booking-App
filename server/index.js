@@ -112,7 +112,7 @@ app.post('/logout', (req, res) => {
 
 app.post('/upload-by-link', async (req,res) => {
   const {link} = req.body;
-  console.log(link)
+
   const newName = 'photo' + Date.now() + '.jpg'
   await imageDownloader.image({
     url: link,
@@ -120,5 +120,6 @@ app.post('/upload-by-link', async (req,res) => {
   })
   res.json(newName);
 })
-// 2:57
+
+app.post('/upload')
 app.listen(PORT)
