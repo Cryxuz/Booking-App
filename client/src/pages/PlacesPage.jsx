@@ -18,7 +18,15 @@ const PlacesPage = () => {
   const [maxGuests, setMaxGuests] = useState(1)
 
   function uploadPhoto(evt) {
-    
+    const files = evt.target.files
+    const data = new FormData()
+    data.set('photos', files)
+    axios.post('/upload', data, {
+      headers: {'Content-type': 'multipart/form-data'}
+    }).then( response => {
+      const {data} = response
+      console.log(data)
+    })
   }
   function inputHeader(text) {
     return <h2 className='mt-4 text-2xl' htmlFor='title'>{text}</h2>;
