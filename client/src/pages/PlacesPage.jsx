@@ -24,10 +24,13 @@ const PlacesPage = () => {
     axios.post('/upload', data, {
       headers: {'Content-type': 'multipart/form-data'}
     }).then( response => {
-      const {data} = response
-      console.log(data)
+      const {data:filename} = response
+      setAddedPhotos(prev => {
+        return [...prev, filename]
+      })
     })
   }
+  
   function inputHeader(text) {
     return <h2 className='mt-4 text-2xl' htmlFor='title'>{text}</h2>;
   }
