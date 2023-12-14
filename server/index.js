@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import imageDownloader from 'image-downloader'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import multer from 'multer'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -121,6 +122,9 @@ app.post('/upload-by-link', async (req,res) => {
   res.json(newName);
 })
 
-app.post('/upload')
+const photosMiddleware = multer({destination: 'uploads'})
+app.post('/upload', photosMiddleware.array('photos', 100),(req,res) => {
+  res.json(req.files)
+})
 
 app.listen(PORT)
