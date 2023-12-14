@@ -123,10 +123,10 @@ app.post('/upload-by-link', async (req,res) => {
   res.json(newName);
 })
 
-const photosMiddleware = multer({destination: 'uploads'})
+const photosMiddleware = multer({destination: 'uploads/'})
 app.post('/upload', photosMiddleware.array('photos', 100),(req,res) => {
-  
-  res.json(uploadedFiles)
+  console.log(req.files)
+  res.json(req.files)
 })
 
 app.listen(PORT)
