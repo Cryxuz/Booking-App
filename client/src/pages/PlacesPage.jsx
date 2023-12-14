@@ -20,9 +20,10 @@ const PlacesPage = () => {
   function uploadPhoto(evt) {
     const files = evt.target.files
     const data = new FormData()
-    for (const file of files) {
-      data.set('photos[]', files)
+    for(let i = 0; i< files.length; i++) {
+      data.append('photos', files[i])
     }
+
     axios.post('/upload', data, {
       headers: {'Content-type': 'multipart/form-data'}
     }).then( response => {
