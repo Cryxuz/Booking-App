@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import multer from 'multer'
 import fs from 'fs'
+import path from 'path'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,14 +19,19 @@ const __dirname = dirname(__filename);
 const app = express()
 dotenv.config()
 
+const photosMiddleware = multer({
+  storage: multer.memoryStorage(),
+});
+
 // genSalt function in the bcrypt library is specifically designed to generate a random salt that can be used in the process of hashing a password.
 const bcryptSalt = bcrypt.genSaltSync(10)
 
 // transfer this to env
 const jwtSecret = 'abcdefg'
 
+const uploadsPath = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(uploadsPath));
 app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
-
 app.use(express.json())
 app.use(cookieParser())
 const PORT = 3000
@@ -123,10 +129,23 @@ app.post('/upload-by-link', async (req,res) => {
   res.json(newName);
 })
 
-const photosMiddleware = multer({destination: 'uploads/'})
-app.post('/upload', photosMiddleware.array('photos', 100),(req,res) => {
-  console.log(req.files)
-  res.json(req.files)
+
+app.post('/upload', photosMiddleware.array('photos', 100), async (req,res) => {
+  const uploadedFiles = []
+for (let i = 0; i < req.files.length; i++) {
+  const { buffer, originalname } = req.files[i];
+  const ext = originalname.split('.').pop();
+  const newName = 'photo' + Date.now() + '.' + ext;
+  const newPath = `${__dirname}/uploads/${newName}`;
+
+  fs.writeFileSync(newPath, buffer);
+  uploadedFiles.push(newPath);
+  
+}
+
+  res.json(uploadedFiles)
 })
+
+
 
 app.listen(PORT)
