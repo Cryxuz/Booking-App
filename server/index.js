@@ -130,21 +130,21 @@ app.post('/upload-by-link', async (req,res) => {
 })
 
 
-app.post('/upload', photosMiddleware.array('photos', 100), async (req,res) => {
-  const uploadedFiles = []
-for (let i = 0; i < req.files.length; i++) {
-  const { buffer, originalname } = req.files[i];
-  const ext = originalname.split('.').pop();
-  const newName = 'photo' + Date.now() + '.' + ext;
-  const newPath = `${__dirname}/uploads/${newName}`;
+app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
+  const uploadedFiles = [];
+  for (let i = 0; i < req.files.length; i++) {
+    const { buffer, originalname } = req.files[i];
+    const ext = originalname.split('.').pop();
+    const newName = 'photo' + Date.now() + '.' + ext;
+    const newPath = `${__dirname}/uploads/${newName}`;
 
-  fs.writeFileSync(newPath, buffer);
-  uploadedFiles.push(newPath);
-  
-}
+    fs.writeFileSync(newPath, buffer);
+    uploadedFiles.push(newName);
+  }
 
-  res.json(uploadedFiles)
-})
+  res.json(uploadedFiles);
+});
+
 
 
 

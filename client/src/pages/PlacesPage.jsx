@@ -103,7 +103,7 @@ const PlacesPage = () => {
               {addedPhotos.length > 0 && addedPhotos.map(link => (
                 <div key={link} className='h-32 flex w-full object-cover'>
 {/* CHANGE THIS LINK AFTER DEPLOYMENT */}
-                  <img className='rounded-2xl' src={'http://localhost:3000/uploads/'+link} alt="" />
+                  <img className='rounded-2xl' src={'http://localhost:3000/uploads/' + link} alt="" />
                 </div>
               ))} 
               <label className='h-32 cursor-pointer flex gap-2 justify-center border bg-transparent rounded-2xl items-center p-2 text-2xl text-gray-600'>
