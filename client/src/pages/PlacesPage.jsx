@@ -47,6 +47,9 @@ const PlacesPage = () => {
       checkIn,
       checkOut,
       maxGuests
+    },
+    {
+      withCredentials:true
     })
     setRedirect('/account/places')
   }

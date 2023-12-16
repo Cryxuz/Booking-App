@@ -147,7 +147,6 @@ app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
 });
 
 app.post('/places', async (req,res) => {
-  const {token} = req.cookies
   const {
     title, 
     address, 
@@ -159,6 +158,8 @@ app.post('/places', async (req,res) => {
     checkout,
     maxGuests,  
   } = req.body
+
+  const {token} = req.cookies
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) {
       console.error('Token verification failed:', err.message);
@@ -176,14 +177,11 @@ app.post('/places', async (req,res) => {
       checkout,
       maxGuests,
     })
-    console.log('Token',token)
-    console.log('body', req.body)
+    
 
     console.log(placeDoc)
     res.json(placeDoc)
   });
-
-  
 })
 
 
