@@ -6,7 +6,7 @@ import { useState } from "react"
 import PlacesPage from "./PlacesPage.jsx"
 import { AccountNavigation } from "./AccountNavigation.jsx"
 
-export const AccountPage = () => {
+export const ProfilePage = () => {
   const {ready, user, setUser} = useContext(UserContext)
   const [redirect, setRedirect ] = useState(null)
   let {subpage} = useParams()

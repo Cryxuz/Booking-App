@@ -2,7 +2,8 @@ import {useState} from 'react'
 import Perks from '../Perks'
 import PhotosUploader from '../PhotosUploader'
 import axios from 'axios'
-import {Navigate, useParams} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
+import { AccountNavigation } from './AccountNavigation'
 
 
 const PlacesFormPage = () => {
@@ -14,9 +15,9 @@ const PlacesFormPage = () => {
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
   const [maxGuests, setMaxGuests] = useState(1)
-  const [redirectToPlacesList, setRedirectToPlacesList] = useState(false)
+  const [redirect, setRedirect] = useState(false)
   const [addedPhotos, setAddedPhotos] = useState([])
-  const {action} = useParams()
+  
 
   const handlePhotosChange = (newPhotos) => {
     setAddedPhotos(newPhotos);
@@ -51,15 +52,17 @@ const PlacesFormPage = () => {
     {
       withCredentials:true
     })
-    setRedirectToPlacesList(true)
+    setRedirect(true)
   }
 
-  if (redirectToPlacesList && !action !== 'new') {
+
+  if (redirect) {
     return <Navigate to={'/account/places'} />
   }
-  
+
   return (
     <div> 
+      <AccountNavigation />
       <form onSubmit={addNewPlace}>
         {/* title */}
         {preInput('Title')}
