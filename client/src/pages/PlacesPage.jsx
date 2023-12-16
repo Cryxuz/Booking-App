@@ -1,7 +1,8 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import Perks from '../Perks'
 import PhotosUploader from '../PhotosUploader'
+import axios from 'axios'
 
 
 const PlacesPage = () => {
@@ -15,6 +16,7 @@ const PlacesPage = () => {
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
   const [maxGuests, setMaxGuests] = useState(1)
+  const [redirect, setRedirect] = useState('')
 
   const handlePhotosChange = (newPhotos) => {
     setAddedPhotos(newPhotos);
@@ -32,8 +34,26 @@ const PlacesPage = () => {
     );
   }
   
-  
+  async function addNewPlace (evt) {
+    evt.preventDefault()
+   
+   await axios.post('/places', {
+      title,
+      address,
+      addedPhotos,
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests
+    })
+    setRedirect('/account/places')
+  }
 
+  if (redirect) {
+    return <Navigate to={redirect} />
+  }
   return (
     <div>
       {action !== 'new' && (
@@ -48,7 +68,7 @@ const PlacesPage = () => {
       )}
       {action === 'new' && (
         <div> 
-          <form>
+          <form onSubmit={addNewPlace}>
             {/* title */}
             {preInput('Title')}
             <input 

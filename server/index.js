@@ -12,6 +12,7 @@ import { dirname } from 'path';
 import multer from 'multer'
 import fs from 'fs'
 import path from 'path'
+import Place from './models/Place.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -145,7 +146,45 @@ app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
   res.json(uploadedFiles);
 });
 
+app.post('/places', async (req,res) => {
+  const {token} = req.cookies
+  const {
+    title, 
+    address, 
+    addedPhotos, 
+    description, 
+    perks, 
+    extraInfo,
+    checkin,
+    checkout,
+    maxGuests,  
+  } = req.body
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    if (err) {
+      console.error('Token verification failed:', err.message);
+      return res.status(401).json({ error: 'Token verification failed' });
+    }
+    const placeDoc = await Place.create({
+      owner: userData.id,
+      title, 
+      address, 
+      addedPhotos, 
+      description, 
+      perks, 
+      extraInfo,
+      checkin,
+      checkout,
+      maxGuests,
+    })
+    console.log('Token',token)
+    console.log('body', req.body)
 
+    console.log(placeDoc)
+    res.json(placeDoc)
+  });
+
+  
+})
 
 
 app.listen(PORT)
