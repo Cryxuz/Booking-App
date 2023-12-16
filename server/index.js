@@ -154,11 +154,12 @@ app.post('/places', async (req,res) => {
     description, 
     perks, 
     extraInfo,
-    checkin,
-    checkout,
+    checkIn,
+    checkOut,
     maxGuests,  
   } = req.body
-
+  const numericCheckIn = parseFloat(checkIn);
+  const numericCheckOut = parseFloat(checkOut);
   const {token} = req.cookies
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) {
@@ -169,17 +170,16 @@ app.post('/places', async (req,res) => {
       owner: userData.id,
       title, 
       address, 
-      addedPhotos, 
+      photos: addedPhotos, 
       description, 
       perks, 
       extraInfo,
-      checkin,
-      checkout,
+      checkIn:numericCheckIn,
+      checkOut:numericCheckOut,
       maxGuests,
     })
-    
 
-    console.log(placeDoc)
+
     res.json(placeDoc)
   });
 })
@@ -192,4 +192,10 @@ app.get('/places', (req,res) => {
     
   })
 })
+
+app.get('/places/:id', async (req,res) => {
+  const {id} = req.params
+  res.json( await Place.findById(id))
+})
+
 app.listen(PORT)

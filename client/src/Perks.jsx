@@ -19,32 +19,32 @@ const Perks = ({selected, onChange}) => {
   return (
     <>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="wifi"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('wifi')} name="wifi"onChange={handleCheckboxClick} />
         <img src={wifi} alt="" />
         <span>Wifi</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="parking"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('parking')} name="parking"onChange={handleCheckboxClick} />
         <img src={parking} alt="" />
         <span>Free parking</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="television"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('television')} name="television"onChange={handleCheckboxClick} />
         <img src={tv} alt="" />
         <span>Television</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="washer"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('washer')} name="washer"onChange={handleCheckboxClick} />
         <img src={washer} alt="" />
         <span>Washer</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="pets"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('pets')} name="pets"onChange={handleCheckboxClick} />
         <img src={pets} alt="" />
         <span>Pets allowed</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer' >
-        <input type="checkbox" name="entrance"onChange={handleCheckboxClick} />
+        <input type="checkbox" checked={selected.includes('entrance')} name="entrance"onChange={handleCheckboxClick} />
         <img src={entrance} alt="" />
         <span>Private Entrance</span>
       </label>

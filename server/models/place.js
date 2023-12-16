@@ -1,17 +1,18 @@
 import mongoose from 'mongoose'
 
 const placeSchema = new mongoose.Schema({
-  owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   title: String,
   address: String,
   photos: [String],
   description: String,
   perks: [String],
   extraInfo: String,
-  checkIn: Number,
+  checkIn: Number,  
   checkOut: Number,
-  maxGuests: Number
-})
+  maxGuests: Number,
+});
+
 // 'Place' is a mongoDB collection
 const PlaceModel = mongoose.model('Place', placeSchema)
 

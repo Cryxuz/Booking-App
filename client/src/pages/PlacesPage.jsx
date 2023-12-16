@@ -23,12 +23,20 @@ const PlacesPage = () => {
           Add new place
         </Link>
       </div>
-      <div>
+      <div className='mt-4 '>
         {places.length > 0 &&
           places.map((place) => (
-          <div key={place._id}>
-            {place.title}
-          </div>
+          <Link to={'/account/places/' + place._id} className='flex cursor-pointer bg-gray-100 p-4 rounded-2xl gap-4' key={place._id}>
+            <div className='w-32 h-32 bg-gray-300 grow shrink-0'>
+              {place.photos.length > 0 && (
+                <img src={place.photos[0]} alt={place.title} />
+              )}
+            </div>
+            <div className='grow-0 shrink'>
+              <h2 className='text-xl'>{place.title}</h2>
+              <p className='text-sm mt-2'>{place.description}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
