@@ -56,17 +56,31 @@ const PlacesFormPage = () => {
   
   async function savePlace (evt) {
     evt.preventDefault()
-    
-   await axios.post('/places', {
-      title,
-      address,
-      addedPhotos,
-      description,
-      perks,
-      extraInfo,
-      checkIn,
-      checkOut,
-      maxGuests
+    const placeData = {
+        title,
+        address,
+        addedPhotos,
+        description,
+        perks,
+        extraInfo,
+        checkIn,
+        checkOut,
+        maxGuests
+    }
+    if (id) {
+      await axios.put('/places', {
+        id,
+        ...placeData
+      },
+      {
+        withCredentials:true
+      })
+      setRedirect(true)
+    } else {
+      // new place
+    }
+    await axios.post('/places', {
+        placeData
     },
     {
       withCredentials:true
