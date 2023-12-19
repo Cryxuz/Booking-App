@@ -79,13 +79,12 @@ const PlacesFormPage = () => {
     } else {
       await axios.post(
         '/places',
-          placeData,
+        placeData,
         {
           withCredentials: true,
         }
       );
     }
-  
     setRedirect(true);
   }
   if (redirect) {

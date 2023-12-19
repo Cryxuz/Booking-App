@@ -192,6 +192,7 @@ app.post('/places', async (req, res) => {
 });
 
 
+
 app.get('/places', (req,res) => {
   const {token} = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -205,4 +206,49 @@ app.get('/places/:id', async (req,res) => {
   res.json( await Place.findById(id))
 })
 
+app.put('/places/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    title,
+    address,
+    addedPhotos,
+    description,
+    perks,
+    extraInfo,
+    checkIn,
+    checkOut,
+    maxGuests,
+  } = req.body;
+
+  const numericCheckIn = parseFloat(checkIn);
+  const numericCheckOut = parseFloat(checkOut);
+  const { token } = req.cookies;
+
+  try {
+    // Verify the user's token
+    const userData = jwt.verify(token, jwtSecret);
+
+    // Ensure that the logged-in user is the owner of the place
+    const place = await Place.findOne({ _id: id, owner: userData.id });
+    if (!place) {
+      return res.status(404).json({ error: 'Place not found' });
+    }
+    place.title = title;
+    place.address = address;
+    place.photos = addedPhotos;
+    place.description = description;
+    place.perks = perks;
+    place.extraInfo = extraInfo;
+    place.checkIn = numericCheckIn;
+    place.checkOut = numericCheckOut;
+    place.maxGuests = maxGuests;
+
+    const updatedPlace = await place.save();
+
+    res.json(updatedPlace);
+  } catch (error) {
+    console.error('Error in /places/:id (PUT) endpoint:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 app.listen(PORT)
