@@ -146,50 +146,57 @@ app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
   res.json(uploadedFiles);
 });
 
-app.post('/places', async (req,res) => {
+app.post('/places', async (req, res) => {
   const {
-    title, 
-    address, 
-    addedPhotos, 
-    description, 
-    perks, 
+    title,
+    address,
+    addedPhotos,
+    description,
+    perks,
     extraInfo,
     checkIn,
     checkOut,
-    maxGuests,  
-  } = req.body
+    maxGuests,
+  } = req.body;
+
   const numericCheckIn = parseFloat(checkIn);
   const numericCheckOut = parseFloat(checkOut);
-  const {token} = req.cookies
+  const { token } = req.cookies;
+
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
-    if (err) {
-      console.error('Token verification failed:', err.message);
-      return res.status(401).json({ error: 'Token verification failed' });
+    try {
+      if (err) {
+        console.error('Token verification failed:', err.message);
+        return res.status(401).json({ error: 'Token verification failed' });
+      }
+
+      const placeDoc = await Place.create({
+        owner: userData.id,
+        title,
+        address,
+        photos: addedPhotos,
+        description,
+        perks,
+        extraInfo,
+        checkIn: numericCheckIn,
+        checkOut: numericCheckOut,
+        maxGuests,
+      });
+
+      res.json(placeDoc);
+    } catch (error) {
+      console.error('Error in /places endpoint:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
-    const placeDoc = await Place.create({
-      owner: userData.id,
-      title, 
-      address, 
-      photos: addedPhotos, 
-      description, 
-      perks, 
-      extraInfo,
-      checkIn:numericCheckIn,
-      checkOut:numericCheckOut,
-      maxGuests,
-    })
-
-
-    res.json(placeDoc)
   });
-})
+});
+
 
 app.get('/places', (req,res) => {
   const {token} = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const {id} = userData;
     res.json(await Place.find({owner: id}))
-    
   })
 })
 

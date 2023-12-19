@@ -69,27 +69,25 @@ const PlacesFormPage = () => {
     }
     console.log('Before request - placeData:', placeData);
     if (id) {
-      await axios.put('/places', {
-        id,
-        ...placeData
-      },
-      {
-        withCredentials:true
-      })
-      setRedirect(true)
+      await axios.put(
+        `/places/${id}`, 
+        placeData,
+        {
+          withCredentials: true,
+        }
+      );
     } else {
-      // new place
+      await axios.post(
+        '/places',
+          placeData,
+        {
+          withCredentials: true,
+        }
+      );
     }
-    await axios.post('/places', {
-        placeData
-    },
-    {
-      withCredentials:true
-    })
-    setRedirect(true)
+  
+    setRedirect(true);
   }
-
-
   if (redirect) {
     return <Navigate to={'/account/places'} />
   }
@@ -144,7 +142,7 @@ const PlacesFormPage = () => {
           <div>
             <h3 className='mt-2 -mb-1'>Check in time:</h3>
             <input 
-              value={checkIn} onChange={evt => setCheckIn(evt.target.value)}
+              value={checkIn} onChange={evt => setCheckIn(evt.target.value === "" ? null : evt.target.value)}
               type="text" 
               placeholder='14:00'
             />
@@ -154,7 +152,7 @@ const PlacesFormPage = () => {
             <h3 className='mt-2 -mb-1'>Check out time:</h3>
             <input
               value={checkOut} 
-              onChange={evt => setCheckOut(evt.target.value)} 
+              onChange={evt => setCheckOut(evt.target.value === "" ? null : evt.target.value)}
               type="text" 
               placeholder='11:00'
             />

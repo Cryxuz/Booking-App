@@ -6,10 +6,16 @@ import axios from 'axios'
 const PlacesPage = () => {
   const [places, setPlaces] = useState([])
   useEffect(() => {
-    axios.get('/places',{ withCredentials: true }).then(({data}) => {
-      setPlaces(data)
-    })
-  }, [])
+    axios.get('/places', { withCredentials: true })
+      .then(({ data }) => {
+        console.log('Received data from placesPage:', data);
+        setPlaces(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching places:', error);
+      });
+  }, []);
+  
   return (
     <div>
       <AccountNavigation />
