@@ -63,10 +63,11 @@ const PlacesFormPage = () => {
         description,
         perks,
         extraInfo,
-        checkIn,
-        checkOut,
-        maxGuests
+        checkIn: parseFloat(checkIn), 
+        checkOut: parseFloat(checkOut),
+        maxGuests: parseInt(maxGuests, 10),
     }
+    console.log('Before request - placeData:', placeData);
     if (id) {
       await axios.put('/places', {
         id,
