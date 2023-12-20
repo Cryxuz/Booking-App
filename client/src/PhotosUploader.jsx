@@ -32,6 +32,11 @@ const PhotosUploader = (props) => {
     });
     setPhotoLink('');
   }
+
+  function removePhoto(link) {
+    onChange([...addedPhotos.filter(photo => photo !== link)])
+  }
+
   return (
     <>
       <div className='flex gap-2'>
