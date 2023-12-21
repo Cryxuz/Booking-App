@@ -6,7 +6,7 @@ export default function IndexPage() {
   useEffect(() => {
     axios.get('/places').then(response => {
       // delete
-      setPlaces([...response.data, ...response.data, ...response.data, ...response.data,])
+      setPlaces(response.data)
     })
   }, [])
   console.log(places)

@@ -32,7 +32,7 @@ const PlacesPage = () => {
       <div className='mt-4 '>
         {places.length > 0 &&
           places.map((place) => (
-          <Link to={'/account/places/' + place._id} className='flex cursor-pointer bg-gray-100 p-4 rounded-2xl gap-4' key={place._id}>
+          <Link to={'/account/places/' + place._id} className='mb-6 flex cursor-pointer bg-gray-100 p-4 rounded-2xl gap-4' key={place._id}>
             <div className='flex w-32 h-32 bg-gray-300 grow shrink-0'>
               {place.photos.length > 0 && (
 // CHANGE LINK BEFORE DEPLOYING
