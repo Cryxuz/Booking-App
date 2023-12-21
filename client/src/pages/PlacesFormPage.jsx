@@ -19,7 +19,7 @@ const PlacesFormPage = () => {
   const [maxGuests, setMaxGuests] = useState(1)
   const [redirect, setRedirect] = useState(false)
   const [addedPhotos, setAddedPhotos] = useState([])
-  
+  const [price, setPrice] = useState(100)
   useEffect(() => {
     if(!id) {
       return
@@ -35,6 +35,7 @@ const PlacesFormPage = () => {
       setCheckIn(data.checkIn)
       setCheckOut(data.checkOut)
       setMaxGuests(data.maxGuests)
+      setPrice(data.price)
     })
   }, [id])
 
@@ -66,6 +67,7 @@ const PlacesFormPage = () => {
         checkIn: parseFloat(checkIn), 
         checkOut: parseFloat(checkOut),
         maxGuests: parseInt(maxGuests, 10),
+        price,
     }
     console.log('Before request - placeData:', placeData);
     if (id) {
@@ -136,7 +138,7 @@ const PlacesFormPage = () => {
           />
         {/* check in & out */}
         {preInput('Check in & out times')}
-        <div className='grid gap-2 sm:grid-cols-3'>
+        <div className='grid gap-2 grid-cols-2 md:grid-cols-4'>
           {/* check in */}
           <div>
             <h3 className='mt-2 -mb-1'>Check in time:</h3>
@@ -162,6 +164,14 @@ const PlacesFormPage = () => {
             <input 
               value={maxGuests} 
               onChange={evt => setMaxGuests(evt.target.value)}
+              type="number" 
+            />
+          </div>
+          <div>
+            <h3>Price per night</h3>
+            <input 
+              value={price} 
+              onChange={evt => setPrice(evt.target.value)}
               type="number" 
             />
           </div>

@@ -157,6 +157,7 @@ app.post('/places', async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
+    price,
   } = req.body;
 
   const numericCheckIn = parseFloat(checkIn);
@@ -181,6 +182,7 @@ app.post('/places', async (req, res) => {
         checkIn: numericCheckIn,
         checkOut: numericCheckOut,
         maxGuests,
+        price,
       });
 
       res.json(placeDoc);
@@ -218,6 +220,7 @@ app.put('/places/:id', async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
+    price,
   } = req.body;
 
   const numericCheckIn = parseFloat(checkIn);
@@ -242,6 +245,7 @@ app.put('/places/:id', async (req, res) => {
     place.checkIn = numericCheckIn;
     place.checkOut = numericCheckOut;
     place.maxGuests = maxGuests;
+    place.price = price
 
     const updatedPlace = await place.save();
 
