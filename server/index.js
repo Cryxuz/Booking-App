@@ -193,7 +193,7 @@ app.post('/places', async (req, res) => {
 
 
 
-app.get('/places', (req,res) => {
+app.get('/user-places', (req,res) => {
   const {token} = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const {id} = userData;
@@ -251,4 +251,9 @@ app.put('/places/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.get('/places', async (req,res) => {
+  res.json( await Place.find())
+})
+
 app.listen(PORT)
