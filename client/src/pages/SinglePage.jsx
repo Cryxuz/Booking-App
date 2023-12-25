@@ -80,9 +80,11 @@ const SinglePage = () => {
           </button>
         </div>
       </div>
-      
+      <div className='my-4'>
+        <h2 className='font-semibold text-2xl'>Description</h2>
+        {place.description}
+      </div>
     </div>
-    
   )
 }
 // CHANGE LINKS BEFORE DEPLOYMENT
