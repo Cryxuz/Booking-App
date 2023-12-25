@@ -59,18 +59,18 @@ const SinglePage = () => {
         <div>{place.photos && place.photos.length > 0 && (
           <div>
             {/* // change localhost before deploying */}
-            <img className='aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[0]} alt="" />
+            <img onClick={() => setShowAllPhotos(true)}className='aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[0]} alt="" />
           </div>
         )}</div>
 
           <div className='grid'>
             <div>{place.photos && place.photos.length > 0 && (
 
-              <img className='aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[1]} alt="" />
+              <img onClick={() => setShowAllPhotos(true)}className='aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[1]} alt="" />
             )}</div>
               <div className='overflow-hidden'>
                 {place.photos && place.photos.length > 0 && (
-              <img className='aspect-square object-cover relative top-2' src={'http://localhost:3000/uploads/'+place.photos[2]} alt="" />
+              <img onClick={() => setShowAllPhotos(true)}className='aspect-square object-cover relative top-2' src={'http://localhost:3000/uploads/'+place.photos[2]} alt="" />
             )}</div>
           </div>
           <button onClick={() => setShowAllPhotos(true)} className='flex gap-2 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-xl shadow-md shadow-gray-500'>
@@ -90,9 +90,12 @@ const SinglePage = () => {
             <h2 className='font-semibold text-2xl'>Description</h2>
             {place.description}
           </div>
-          Check in: {place.checkIn} <br/>
-          Check out: {place.checkOut} <br />
-          Max number of guests: {place.maxGuests}
+          <div className='pt-4'>
+            <span className='font-semibold'>Check in: </span>{place.checkIn} <br/>
+            <span className='font-semibold'>Check out: </span>{place.checkOut} <br />
+            <span className='font-semibold'>Max number of guests: </span>{place.maxGuests}
+          </div>
+          
         </div>
         <div>
           <BookingWidget place={place}/>
