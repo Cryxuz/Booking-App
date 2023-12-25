@@ -45,7 +45,7 @@ const SinglePage = () => {
   }
 
   return (
-    <div className='mt-4 py-6 bg-gray-100 -mx-8 px-8'>
+    <div className='mt-4 pt-6 bg-gray-100 -mx-8 px-8'>
       <h1 className='text-3xl'>{place.title}</h1>
       <a className='flex gap-1 my-3 font-semibold underline ' target='_blank' href={'https://maps.google.com/?q='+place.address} rel="noreferrer">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -83,7 +83,7 @@ const SinglePage = () => {
       </div>
 
       {/*  check in and out */}
-      <div className='mt-8  gap-8 grid grid-cols-1 md:grid-cols-[2fr_1fr]'>
+      <div className='mt-8 mb-8 gap-8 grid grid-cols-1 md:grid-cols-[2fr_1fr]'>
         <div>
       {/* description */}
           <div className='my-4'>
@@ -97,6 +97,12 @@ const SinglePage = () => {
         <div>
           <BookingWidget place={place}/>
         </div>
+      </div>
+      <div className="bg-white -mx-8 px-8 py-8 border-t">
+        <div>
+          <h2 className='font-semibold text-2xl'>Extra info</h2>
+        </div>
+        <div className='mb-4 mt-2 text-sm font-gray-700 leading-5'>{place.extraInfo}</div>
       </div>
     </div>
   )
