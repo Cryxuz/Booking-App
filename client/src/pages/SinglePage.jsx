@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams} from 'react-router-dom'
+import BookingWidget from '../BookingWidget'
 
 
 const SinglePage = () => {
@@ -80,9 +81,22 @@ const SinglePage = () => {
           </button>
         </div>
       </div>
-      <div className='my-4'>
-        <h2 className='font-semibold text-2xl'>Description</h2>
-        {place.description}
+
+      {/*  check in and out */}
+      <div className='mt-8  gap-8 grid grid-cols-1 md:grid-cols-[2fr_1fr]'>
+        <div>
+      {/* description */}
+          <div className='my-4'>
+            <h2 className='font-semibold text-2xl'>Description</h2>
+            {place.description}
+          </div>
+          Check in: {place.checkIn} <br/>
+          Check out: {place.checkOut} <br />
+          Max number of guests: {place.maxGuests}
+        </div>
+        <div>
+          <BookingWidget place={place}/>
+        </div>
       </div>
     </div>
   )
