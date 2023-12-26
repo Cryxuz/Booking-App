@@ -1,6 +1,10 @@
+import { useState } from "react"
 
 
 const BookingWidget = (place) => {
+  const [checkIn, setCheckIn] = useState('')
+  const [checkOut, setCheckOut] = useState('')
+  const [numberOfGuests, setNumberOfGuests] = useState(1)
   return (
     <div className='bg-white shadow p-4 rounded-2xl'>
       <div className='text-2xl text-center my-2'>
