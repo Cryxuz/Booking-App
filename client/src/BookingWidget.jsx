@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react"
 import {differenceInCalendarDays} from 'date-fns'
 
-const BookingWidget = (place) => {
+const BookingWidget = ({place}) => {
   const [checkIn, setCheckIn] = useState('')
   const [checkOut, setCheckOut] = useState('')
   const [numberOfGuests, setNumberOfGuests] = useState(1)
@@ -9,7 +10,7 @@ const BookingWidget = (place) => {
   if(checkIn && checkOut) {
     numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date (checkIn))
   }
-  console.log(place.price)
+  console.log(numberOfNights * place.price)
   return (
     <div className='bg-white shadow p-4 rounded-2xl'>
       <div className='text-2xl text-center my-2'>
@@ -43,9 +44,7 @@ const BookingWidget = (place) => {
       <button className="primary mt-4">
         Book this place
         {numberOfNights > 0 && (
-          <span>
-             ${numberOfNights * Number(place.price)}
-          </span>
+          <span> ${numberOfNights * place.price}</span>
         )}
       </button>
     </div>
