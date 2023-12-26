@@ -14,16 +14,25 @@ const BookingWidget = (place) => {
         <div className="flex">
           <div className='px-3 py-4'>
             <label>Check in:</label>
-            <input type="date" />
+            <input 
+              type="date" 
+              value={checkIn} 
+              onChange={evt => setCheckIn(evt.target.value)} />
           </div>
           <div className='px-3 py-4 border-l'>
             <label>Check out:</label>
-            <input type="date" />
+            <input 
+              type="date" 
+              value={checkOut} 
+              onChange={evt => setCheckOut(evt.target.value)}/>
           </div>
         </div>
         <div className='px-3 py-4 border-t'>
             <label>Number of guests:</label>
-            <input type="number" value={1}/>
+            <input 
+              type="number" 
+              value={numberOfGuests} 
+              onChange={evt => setNumberOfGuests(evt.target.value)}/>
         </div>
       </div>
       <button className="primary mt-4">Book this place</button>
