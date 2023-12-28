@@ -260,4 +260,11 @@ app.get('/places', async (req,res) => {
   res.json( await Place.find())
 })
 
+app.post('/booking', (req,res) => {
+  const {
+    place, checkIn, checkOut, numberOfGuests, name, phone, price
+  } = req.body
+
+})
+
 app.listen(PORT)
