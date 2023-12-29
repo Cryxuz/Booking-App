@@ -1,6 +1,13 @@
+import AccountNavigation from './AccountNavigation'
+
 const BookingsPage = () => {
   return (
-    <div>BookingsPage</div>
+    <div>
+      <AccountNavigation />
+      <div>
+        
+      </div>
+    </div>
   )
 }
 
