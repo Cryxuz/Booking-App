@@ -39,6 +39,5 @@ export const AccountNavigation = () => {
           My accomodations
         </Link>
       </nav>
-   
   )
 }
