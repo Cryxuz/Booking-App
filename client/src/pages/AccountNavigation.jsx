@@ -41,3 +41,5 @@ export const AccountNavigation = () => {
       </nav>
   )
 }
+
+export default AccountNavigation
