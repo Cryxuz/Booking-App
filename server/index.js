@@ -45,14 +45,26 @@ app.use(cors({
 // stored in .env file for security
 mongoose.connect(process.env.MONGO_URL)
 
-function getUserDataFromReq(req){
+function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
-    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-      if(err) throw err;
-      resolve(userData)
-    })
-  })
+    const token = req.cookies.token;
+    if (!token) {
+      // Handle the case where the token is missing
+      return reject(new Error('Token missing'));
+    }
+
+    jwt.verify(token, jwtSecret, {}, (err, userData) => {
+      if (err) {
+        // Handle the case where token verification fails
+        console.error('Token verification failed:', err.message);
+        return reject(err);
+      }
+
+      resolve(userData);
+    });
+  });
 }
+
 
 app.get('/test', (req,res) => {
   res.json('testok')
