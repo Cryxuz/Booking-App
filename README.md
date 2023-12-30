@@ -3,7 +3,7 @@
 ## MERN STACK
 
 ## TIME :
-###  5:58:25
+###  6:24
 
 # change size of div and imgs in index page
 
