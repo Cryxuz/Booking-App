@@ -45,16 +45,16 @@ app.use(cors({
 // stored in .env file for security
 mongoose.connect(process.env.MONGO_URL)
 
-function getUserDataFromReq(req){
-  console.log('this is req.cookies.token',req.cookies)
-  return new Promise((resolve, reject) => {
+// function getUserDataFromReq(req){
+//   console.log('this is req.cookies.token',req)
+//   return new Promise((resolve, reject) => {
     
-    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-      if(err) throw err;
-      resolve(userData)
-    })
-  })
-}
+//     jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+//       if(err) throw err;
+//       resolve(userData)
+//     })
+//   })
+// }
 
 app.get('/test', (req,res) => {
   res.json('testok')
@@ -209,6 +209,7 @@ app.post('/places', async (req, res) => {
 
 app.get('/user-places', (req,res) => {
   const {token} = req.cookies;
+  
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     const {id} = userData;
     res.json(await Place.find({owner: id}))
@@ -273,6 +274,7 @@ app.get('/places', async (req,res) => {
 })
 
 app.post('/bookings', async (req,res) => {
+ 
   const userData = await getUserDataFromReq(req)
   const {
     place, checkIn, checkOut, numberOfGuests, name, phone, price
@@ -286,8 +288,6 @@ app.post('/bookings', async (req,res) => {
     throw err
   })
 })
-
-
 
 app.get('/bookings', async (req,res) => {
   const userData = await getUserDataFromReq(req)
