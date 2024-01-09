@@ -14,6 +14,7 @@ import fs from 'fs'
 import path from 'path'
 import Place from './models/Place.js'
 import Booking from './models/Booking.js'
+import BookingModel from './models/Booking.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -279,30 +280,33 @@ app.post('/bookings', async (req, res) => {
     return res.status(400).json({ error: 'Place ID is required' });
   }
 
+  const { token } = req.cookies; 
+
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     try {
       if (err) {
         console.error('POST: Token verification failed:', err.message);
         return res.status(401).json({ error: 'Token verification failed' });
       }
-
+  
       const bookingDoc = await BookingModel.create({
         user: userData.id,
         place: placeId,
-        checkIn: new Date(checkIn), // Convert to Date
-        checkOut: new Date(checkOut), // Convert to Date
+        checkIn: new Date(checkIn),
+        checkOut: new Date(checkOut),
         name,
         phone,
         price,
       });
-
+  
       res.json(bookingDoc);
     } catch (error) {
       console.error('Error in /bookings (POST) endpoint:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-});
+}); 
+
 
 app.get('/bookings', async (req, res) => {
   const { token } = req.cookies;

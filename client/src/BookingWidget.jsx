@@ -34,7 +34,7 @@ const BookingWidget = ({place}) => {
         numberOfGuests,
         name,
         phone,
-        place: place._id,
+        placeId: place._id, 
         price: numberOfNights * place.price,
       }, {
         withCredentials: true,
@@ -44,7 +44,6 @@ const BookingWidget = ({place}) => {
       setRedirect(`/account/bookings/${bookingId}`);
     } catch (error) {
       console.error('Booking failed:', error.response.data);
-      // Handle the error or show it to the user
     }
   }
 
