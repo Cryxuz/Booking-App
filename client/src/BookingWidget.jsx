@@ -25,20 +25,27 @@ const BookingWidget = ({place}) => {
     numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date (checkIn))
   }
 
-  async function handleBooking () {
-    
-    const response = await axios.post('/bookings', {
-      checkIn, 
-      checkOut, 
-      numberOfGuests, 
-      name, 
-      phone, 
-      place:place._id, 
-      price: numberOfNights * place.price,
+  async function handleBooking() {
+    console.log('Place ID:', place._id);
+    try {
+      const response = await axios.post('/bookings', {
+        checkIn,
+        checkOut,
+        numberOfGuests,
+        name,
+        phone,
+        place: place._id,
+        price: numberOfNights * place.price,
+      }, {
+        withCredentials: true,
+      });
+  
+      const bookingId = response.data._id;
+      setRedirect(`/account/bookings/${bookingId}`);
+    } catch (error) {
+      console.error('Booking failed:', error.response.data);
+      // Handle the error or show it to the user
     }
-    )
-    const bookingId = response.data._id
-    setRedirect(`/account/bookings/${bookingId}`)
   }
 
   if(redirect) {

@@ -274,7 +274,10 @@ app.get('/places', async (req,res) => {
 
 app.post('/bookings', async (req, res) => {
   const { placeId, checkIn, checkOut, numberOfGuests, name, phone, price } = req.body;
-  const { token } = req.cookies;
+
+  if (!placeId) {
+    return res.status(400).json({ error: 'Place ID is required' });
+  }
 
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     try {
@@ -283,12 +286,11 @@ app.post('/bookings', async (req, res) => {
         return res.status(401).json({ error: 'Token verification failed' });
       }
 
-      const bookingDoc = await Booking.create({
+      const bookingDoc = await BookingModel.create({
         user: userData.id,
         place: placeId,
-        checkIn: parseFloat(checkIn),
-        checkOut: parseFloat(checkOut),
-        numberOfGuests,
+        checkIn: new Date(checkIn), // Convert to Date
+        checkOut: new Date(checkOut), // Convert to Date
         name,
         phone,
         price,
