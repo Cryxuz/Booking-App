@@ -46,7 +46,6 @@ app.use(cors({
 mongoose.connect(process.env.MONGO_URL)
 
 // function getUserDataFromReq(req){
-//   console.log('this is req.cookies.token',req)
 //   return new Promise((resolve, reject) => {
     
 //     jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
@@ -273,26 +272,53 @@ app.get('/places', async (req,res) => {
   res.json( await Place.find())
 })
 
-app.post('/bookings', async (req,res) => {
- 
-  const userData = await getUserDataFromReq(req)
-  const {
-    place, checkIn, checkOut, numberOfGuests, name, phone, price
-  } = req.body
-   Booking.create({
-    place, checkIn, checkOut, numberOfGuests, name, phone, price,
-    user:userData.id,
-  }).then((doc) => {
-    res.json(doc)
-  }).catch((err) => {
-    throw err
-  })
-})
+app.post('/bookings', async (req, res) => {
+  const { placeId, checkIn, checkOut, numberOfGuests, name, phone, price } = req.body;
+  const { token } = req.cookies;
 
-app.get('/bookings', async (req,res) => {
-  const userData = await getUserDataFromReq(req)
-  userData.id
-  res.json( await Booking.find({user:userData.id}) )
-})
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    try {
+      if (err) {
+        console.error('POST: Token verification failed:', err.message);
+        return res.status(401).json({ error: 'Token verification failed' });
+      }
+
+      const bookingDoc = await Booking.create({
+        user: userData.id,
+        place: placeId,
+        checkIn: parseFloat(checkIn),
+        checkOut: parseFloat(checkOut),
+        numberOfGuests,
+        name,
+        phone,
+        price,
+      });
+
+      res.json(bookingDoc);
+    } catch (error) {
+      console.error('Error in /bookings (POST) endpoint:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+});
+
+app.get('/bookings', async (req, res) => {
+  const { token } = req.cookies;
+
+  jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+    try {
+      if (err) {
+        console.error('GET:Token verification failed:', err.message);
+        return res.status(401).json({ error: 'Token verification failed' });
+      }
+
+      const bookings = await Booking.find({ user: userData.id }).populate('place');
+      res.json(bookings);
+    } catch (error) {
+      console.error('Error in /bookings (GET) endpoint:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+});
 
 app.listen(PORT)
