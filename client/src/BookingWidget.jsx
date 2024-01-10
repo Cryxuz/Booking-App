@@ -16,7 +16,7 @@ const BookingWidget = ({place}) => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name)
+      setName(user.name || '')
     }
   }, [user])
 
