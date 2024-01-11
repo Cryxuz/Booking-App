@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import AccountNavigation from './AccountNavigation'
 import axios from 'axios'
 import PlaceImg from '../PlaceImg'
+import {format} from 'date-fns'
 
 const BookingsPage = () => {
 
@@ -18,9 +19,14 @@ const BookingsPage = () => {
       <AccountNavigation />
       <div>
         {bookings.length > 0 && bookings.map((booking, index) => (
-          <div key={index}>
-            <PlaceImg place={booking.place} />
-            {booking.checkIn} -&gt; {booking.checkOut}
+          <div className='flex gap-4 bg-gray-200 rounded-2xl overflow-hidden' key={index}>
+            <div className='w-48'>
+             <PlaceImg place={booking.place} />
+            </div>
+            <div className='py-3 '>
+              <h2 className='text-xl'>{booking.place.title}</h2>
+              {format(new Date (booking.checkIn), 'yyyy-MM-dd')} -&gt; {format(new Date (booking.checkOut), 'yyyy-MM-dd')}
+            </div>
           </div>
         ))}
       </div>
