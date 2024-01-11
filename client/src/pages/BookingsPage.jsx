@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import AccountNavigation from './AccountNavigation'
 import axios from 'axios'
 import PlaceImg from '../PlaceImg'
-import {format} from 'date-fns'
+import {differenceInCalendarDays, format} from 'date-fns'
 
 const BookingsPage = () => {
 
@@ -25,8 +25,14 @@ const BookingsPage = () => {
             </div>
             <div className='py-3 '>
               <h2 className='text-xl'>{booking.place.title}</h2>
-              {format(new Date (booking.checkIn), 'yyyy-MM-dd')} -&gt; {format(new Date (booking.checkOut), 'yyyy-MM-dd')}
-            </div>
+              <div>
+                {format(new Date (booking.checkIn), 'yyyy-MM-dd')} -&gt; {format(new Date (booking.checkOut), 'yyyy-MM-dd')}
+              </div>
+              <div>
+                Number of nights: {differenceInCalendarDays(new Date(booking.checkOut), new Date(booking.checkIn))}
+                Total price: ${booking.price}
+              </div>
+            </div> 
           </div>
         ))}
       </div>
