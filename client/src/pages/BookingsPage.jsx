@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import AccountNavigation from './AccountNavigation'
 import axios from 'axios'
+import PlaceImg from '../PlaceImg'
 
 const BookingsPage = () => {
 
@@ -18,7 +19,7 @@ const BookingsPage = () => {
       <div>
         {bookings.length > 0 && bookings.map((booking, index) => (
           <div key={index}>
-            
+            <PlaceImg place={booking.place} />
             {booking.checkIn} -&gt; {booking.checkOut}
           </div>
         ))}
