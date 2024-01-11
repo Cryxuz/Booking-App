@@ -18,6 +18,7 @@ const BookingsPage = () => {
       <div>
         {bookings.length > 0 && bookings.map((booking, index) => (
           <div key={index}>
+            
             {booking.checkIn} -&gt; {booking.checkOut}
           </div>
         ))}
