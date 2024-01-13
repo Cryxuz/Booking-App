@@ -17,6 +17,11 @@ const Booking = () => {
       })
     }
   }, [id])
+
+  if(!booking) {
+    return '';
+  }
+
   return (
     <div>Booking single: {id}</div>
   )
