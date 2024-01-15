@@ -2,6 +2,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import AddressLink from '../components/AddressLink'
+import PlaceGallery from '../PlaceGallery'
 
 const Booking = () => {
   const {id} = useParams()
@@ -23,8 +25,14 @@ const Booking = () => {
   }
 
   return (
-    <div>
-      
+    <div className='my-8'>
+      <h1 className='text-3xl'>{booking.place.title}</h1>
+      <AddressLink className='my-2 block' address={booking.place.address} />
+      <div className="bg-gray-200 p-4 mb-4 rounded-2xl">
+        <h2 className='text-xl'>Your booking information</h2>
+        dates
+      </div>
+      <PlaceGallery place={booking.place} />
     </div>
   )
 }
