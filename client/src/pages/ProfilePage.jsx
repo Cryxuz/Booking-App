@@ -42,7 +42,9 @@ export const ProfilePage = () => {
       <AccountNavigation />
       {subpage === 'profile' && (
         <div className="text-center max-w-md mx-auto">
-          Logged in as {user.name} ({user.email})
+          Logged in as {user.name} 
+          <br />
+          ({user.email})
           <button onClick={logout} className="primary mt-2 max-w-sm">Log out</button>
         </div>
       )}
