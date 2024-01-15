@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AddressLink from '../components/AddressLink'
 import PlaceGallery from '../PlaceGallery'
+import BookingDates from '../components/BookingDates'
 
 const Booking = () => {
   const {id} = useParams()
@@ -30,7 +31,7 @@ const Booking = () => {
       <AddressLink className='my-2 block' address={booking.place.address} />
       <div className="bg-gray-200 p-4 mb-4 rounded-2xl">
         <h2 className='text-xl'>Your booking information</h2>
-        dates
+        <BookingDates booking={booking} />
       </div>
       <PlaceGallery place={booking.place} />
     </div>
