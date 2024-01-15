@@ -6,11 +6,11 @@ const PlaceImg = ({ place, index = 0, className = null }) => {
   }
 
   if (!className) {
-    className = 'object-cover rounded-md max-h-[100%] max-w-[100%] ';
+    className = 'w-full h-full object-cover rounded-md max-h-[100%] max-w-[100%] ';
   }
 
   return (
-    <div className='flex items-center'>
+    <div className='flex items-center justify-center bg-gray-300 w-40 h-40 grow shrink-0'>
       <img className={className} src={'http://localhost:3000/uploads/' + place.photos[index]} alt={place.title} />
     </div>
   );

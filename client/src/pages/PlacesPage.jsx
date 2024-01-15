@@ -34,9 +34,9 @@ const PlacesPage = () => {
         {places.length > 0 &&
           places.map((place) => (
           <Link to={'/account/places/' + place._id} className='mb-6 flex cursor-pointer bg-gray-100 p-4 rounded-2xl gap-4' key={place._id}>
-            <div className='flex w-32 h-32 bg-gray-300 grow shrink-0'>
+           
               <PlaceImg place={place} />
-            </div>
+            
             <div className='grow-0 shrink'>
               <h2 className='text-xl'>{place.title}</h2>
               <p className='text-sm mt-2'>{place.description}</p>
