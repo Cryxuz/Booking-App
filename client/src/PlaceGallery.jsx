@@ -25,11 +25,14 @@ const PlaceGallery = ({place}) => {
                Close photos
               </button>
           </div>
-          {place.photos?.length > 0 && place.photos.map((photo, index) => (
-            <div key={index}>
-              <img src={'http://localhost:3000/uploads/' + photo} alt="" />
-            </div>
-          ))}
+          <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:px-12 lg:grid-cols-2 md:gap-6'>
+            {place.photos?.length > 0 && place.photos.map((photo, index) => (
+              <div key={index}>
+                <img className='rounded-md object-cover w-full h-48 md:h-64 lg:h-80 xl:h-96' src={'http://localhost:3000/uploads/' + photo} alt="" />
+              </div>
+            ))}
+          </div>
+          
         </div>
       </div>
     )
