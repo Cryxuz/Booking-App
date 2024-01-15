@@ -23,7 +23,9 @@ const Booking = () => {
   }
 
   return (
-    <div>Booking single: {id}</div>
+    <div>
+      
+    </div>
   )
 }
 
