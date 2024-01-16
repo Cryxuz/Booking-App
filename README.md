@@ -1,13 +1,7 @@
 # Booking-App
 
-## MERN STACK
+### .env
 
-[] find errors
+##### MONGO_URL=mongodb+srv://booking:booking@cluster0.2r3xm1q.mongodb.net/?retryWrites=true&w=majority
 
-[] delete logs
-
-[] improve code readability
-
-[] run dist build
-
-[] deploy @ onrender
+##### JWT_SECRET=abcdefg
