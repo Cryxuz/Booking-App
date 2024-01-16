@@ -96,7 +96,7 @@ const PlacesFormPage = () => {
     <div> 
       <AccountNavigation />
       <form onSubmit={savePlace}>
-        {/* title */}
+
         {preInput('Title')}
         <input 
           value={title} 
@@ -105,7 +105,7 @@ const PlacesFormPage = () => {
           type="text" 
           placeholder='Title: My lovely apartment' 
         /> 
-        {/* address */}
+
         {preInput('Address')}
         <input 
           value={address} 
@@ -114,31 +114,31 @@ const PlacesFormPage = () => {
           type="text" 
           placeholder='Address: 123 Fake Street' 
         /> 
-        {/* photos */}
+
         {preInput('Photos')}
         <PhotosUploader addedPhotos={addedPhotos} onChange={handlePhotosChange}/>
-        {/* description */}
+
         {preInput('Description')}
         <textarea 
           value={description} 
           onChange={evt => setDescription(evt.target.value)} 
         />
-        {/* perks */}
+
         {preInput('Perks')}
         <div className='mt-2 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6'>
           <Perks selected={perks} onChange={setPerks} />
         </div>
-        {/* extra info */}
+
         {preInput('Extra Info')}
         <p className='text-sm text-gray-500'>House rules, etc.</p>
         <textarea 
           value={extraInfo} 
           onChange={evt => setExtraInfo(evt.target.value)}
           />
-        {/* check in & out */}
+
         {preInput('Check in & out times')}
         <div className='grid gap-2 grid-cols-2 md:grid-cols-4'>
-          {/* check in */}
+
           <div>
             <h3 className='mt-2 -mb-1'>Check in time:</h3>
             <input 
@@ -147,7 +147,7 @@ const PlacesFormPage = () => {
               placeholder='14:00'
             />
           </div>
-          {/* check out */}
+
           <div>
             <h3 className='mt-2 -mb-1'>Check out time:</h3>
             <input
@@ -157,7 +157,7 @@ const PlacesFormPage = () => {
               placeholder='11:00'
             />
           </div>
-          {/* max guests */}
+
           <div>
             <h3>Max guests</h3>
             <input 

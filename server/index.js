@@ -26,11 +26,10 @@ const photosMiddleware = multer({
   storage: multer.memoryStorage(),
 });
 
-// genSalt function in the bcrypt library is specifically designed to generate a random salt that can be used in the process of hashing a password.
 const bcryptSalt = bcrypt.genSaltSync(10)
 
-// transfer this to env
-const jwtSecret = 'abcdefg'
+const jwtSecret = process.env.JWT_SECRET
+
 
 const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
@@ -43,18 +42,7 @@ app.use(cors({
   credentials: true,
 }))
 
-// stored in .env file for security
 mongoose.connect(process.env.MONGO_URL)
-
-// function getUserDataFromReq(req){
-//   return new Promise((resolve, reject) => {
-    
-//     jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
-//       if(err) throw err;
-//       resolve(userData)
-//     })
-//   })
-// }
 
 app.get('/test', (req,res) => {
   res.json('testok')
@@ -63,7 +51,7 @@ app.get('/test', (req,res) => {
 app.post('/register', async (req,res) => {
   const {name, email, password} = req.body
   try {
-    // creating new user to the database and hashing its password
+   
   const user = await User.create({
     name,
     email,
@@ -81,18 +69,15 @@ app.post('/login', async (req,res) => {
   const {email, password} = req.body
   const user = await User.findOne({email})
   if(user) {
-    // checking the password is correct comparing entered password to hashed passowrd
+   
     const passOk = bcrypt.compareSync(password, user.password)
 
     if (passOk) {
-      // This line generates a JSON Web Token (JWT) using the jwt.sign method. The token contains information about the user, such as their email and user ID. 
       const token = jwt.sign({ 
         email: user.email, 
         id: user._id, 
         name: user.name
       }, jwtSecret);
-      // this line is setting a secure, HTTP-only cookie named 'token' in the HTTP response
-      // this is the line that generates cookies in http response header
       res.cookie('token', token, { httpOnly: true, secure: false }).json(user);
     } else {
       res.json('password incorrect');
@@ -113,19 +98,18 @@ app.get('/profile', async (req, res) => {
         const { name, email, _id } = user;
         res.json({ name, email, _id });
       } else {
-        res.json(null); // User not found
+        res.json(null); 
       }
     } catch (err) {
-      res.json(null); // Token verification failed or expired
+      res.json(null); 
     }
   } else {
-    res.json(null); // No token in cookies
+    res.json(null);
   }
 });
 
 app.post('/logout', (req, res) => {
 
-  // Resetting the token cookie
   res.cookie('token', '', { expires: new Date(0), httpOnly: true }).json(true);
   res.json({ success: true });
 });
@@ -241,10 +225,8 @@ app.put('/places/:id', async (req, res) => {
   const { token } = req.cookies;
 
   try {
-    // Verify the user's token
     const userData = jwt.verify(token, jwtSecret);
 
-    // Ensure that the logged-in user is the owner of the place
     const place = await Place.findOne({ _id: id, owner: userData.id });
     if (!place) {
       return res.status(404).json({ error: 'Place not found' });

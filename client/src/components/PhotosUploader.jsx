@@ -59,7 +59,6 @@ const PhotosUploader = (props) => {
       <div className='grid gap-2 grid-cols-3 mt-2 md:grid-cols-4 lg:grid-cols-6'>
         {addedPhotos.length > 0 && addedPhotos.map(link => (
           <div key={link} className='relative h-32 flex w-full object-cover'>
-{/* CHANGE LINK BEFORE DEPLOYING */}
             <img className='rounded-2xl w-[100%]' src={'http://localhost:3000/uploads/' + link} alt="" />
             <button onClick={evt => removePhoto(evt,link)} className='absolute bottom-1 right-1 text-white bg-black p-2 bg-opacity-50 rounded-lg'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="w-6 h-6">
