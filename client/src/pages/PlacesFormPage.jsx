@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import Perks from '../Perks'
-import PhotosUploader from '../PhotosUploader'
+import Perks from '../components/Perks'
+import PhotosUploader from '../components/PhotosUploader'
 import axios from 'axios'
 import {Navigate, useParams} from 'react-router-dom'
 import { AccountNavigation } from './AccountNavigation'
@@ -69,7 +69,6 @@ const PlacesFormPage = () => {
         maxGuests: parseInt(maxGuests, 10),
         price,
     }
-    console.log('Before request - placeData:', placeData);
     if (id) {
       await axios.put(
         `/places/${id}`, 

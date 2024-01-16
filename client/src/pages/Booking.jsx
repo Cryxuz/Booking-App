@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import AddressLink from '../components/AddressLink'
-import PlaceGallery from '../PlaceGallery'
+import PlaceGallery from '../components/PlaceGallery'
 import BookingDates from '../components/BookingDates'
 
 const Booking = () => {

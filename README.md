@@ -2,13 +2,12 @@
 
 ## MERN STACK
 
-## TIME :
-###  6:39
+[] find errors
 
-# ERRORS
-## problem is getUserDataFromReq function in index.js, doesnt rcv token.
+[] delete logs
 
-# change size of div and imgs in index page
+[] improve code readability
 
-### date-fns installed for calendar
+[] run dist build
 
+[] deploy @ onrender

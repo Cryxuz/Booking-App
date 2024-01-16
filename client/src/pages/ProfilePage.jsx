@@ -14,7 +14,6 @@ export const ProfilePage = () => {
   if (subpage === undefined) {
     subpage = 'profile'
   }
-  console.log(subpage)
 
   async function logout() {
     try {

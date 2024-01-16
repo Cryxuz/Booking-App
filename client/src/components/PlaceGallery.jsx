@@ -12,7 +12,6 @@ const PlaceGallery = ({place}) => {
   }
 
   if (showAllPhotos) {
-    console.log(place.photos)
     return (
       <div className='absolute inset-0 bg-black text-white min-h-screen'>
         <div className='bg-black p-8 grid gap-4'>
@@ -43,7 +42,6 @@ const PlaceGallery = ({place}) => {
         <div className='grid gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden'>
           <div>{place.photos && place.photos.length > 0 && (
             <div>
-              {/* // change localhost before deploying */}
               <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[0]} alt="" />
             </div>
           )}</div>

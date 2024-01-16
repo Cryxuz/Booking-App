@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import AccountNavigation from './AccountNavigation'
 import axios from 'axios'
-import PlaceImg from '../PlaceImg'
+import PlaceImg from '../components/PlaceImg'
 import { Link } from 'react-router-dom'
 import BookingDates from '../components/BookingDates'
 

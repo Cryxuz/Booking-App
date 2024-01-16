@@ -10,14 +10,12 @@ export default function IndexPage() {
       setPlaces(response.data)
     })
   }, [])
-  console.log(places)
   return (
        <div className="grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
         {places.length > 0 && places.map(place => (
-          <Link to={'/place/'+place._id} key={place.id}>
+          <Link to={'/place/'+place._id} key={place._id}>
             <div className="flex mb-2">
               {place.photos?.[0] && (
-// CHANGE LOCALHOST BEFORE DEPLOYING
                   <img className="rounded-2xl object-cover aspect-square" src={'http://localhost:3000/uploads/' + place.photos?.[0]} alt={place.id} />
               )}
             </div>
