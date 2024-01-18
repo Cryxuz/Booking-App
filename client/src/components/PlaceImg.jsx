@@ -11,7 +11,7 @@ const PlaceImg = ({ place, index = 0, className = null }) => {
 
   return (
     <div className='flex items-center justify-center bg-gray-300 w-40 h-40 grow shrink-0'>
-      <img className={className} src={'http://localhost:3000/uploads/' + place.photos[index]} alt={place.title} />
+      <img className={className} src={'https://mern-booking-app-976g.onrender.com/uploads/' + place.photos[index]} alt={place.title} />
     </div>
   );
 };

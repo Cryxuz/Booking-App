@@ -27,7 +27,7 @@ const PlaceGallery = ({place}) => {
           <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:px-12 lg:grid-cols-2 md:gap-6'>
             {place.photos?.length > 0 && place.photos.map((photo, index) => (
               <div key={index}>
-                <img className='rounded-md object-cover w-full h-48 md:h-64 lg:h-80 xl:h-96' src={'http://localhost:3000/uploads/' + photo} alt="" />
+                <img className='rounded-md object-cover w-full h-48 md:h-64 lg:h-80 xl:h-96' src={'http://localhost:3000/uploads/uploads/' + photo} alt="" />
               </div>
             ))}
           </div>
@@ -42,18 +42,18 @@ const PlaceGallery = ({place}) => {
         <div className='grid gap-2 grid-cols-[2fr_1fr] rounded-3xl overflow-hidden'>
           <div>{place.photos && place.photos.length > 0 && (
             <div>
-              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[0]} alt="" />
+              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover' src={'http://localhost:3000/uploads/uploads/'+place.photos[0]} alt="" />
             </div>
           )}</div>
 
           <div className='grid'>
             <div>{place.photos && place.photos.length > 0 && (
 
-              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover' src={'http://localhost:3000/uploads/'+place.photos[1]} alt="" />
+              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover' src={'http://localhost:3000/uploads/uploads/'+place.photos[1]} alt="" />
             )}</div>
               <div className='overflow-hidden'>
                 {place.photos && place.photos.length > 0 && (
-              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover relative top-2' src={'http://localhost:3000/uploads/'+place.photos[2]} alt="" />
+              <img onClick={() => setShowAllPhotos(true)}className='cursor-pointer aspect-square object-cover relative top-2' src={'http://localhost:3000/uploads/uploads/'+place.photos[2]} alt="" />
             )}</div>
           </div>
           <button onClick={() => setShowAllPhotos(true)} className='flex gap-2 absolute bottom-2 right-2 py-2 px-4 bg-white rounded-xl shadow-md shadow-gray-500'>

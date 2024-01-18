@@ -13,7 +13,6 @@ import multer from 'multer'
 import fs from 'fs'
 import path from 'path'
 import Place from './models/Place.js'
-import Booking from './models/Booking.js'
 import BookingModel from './models/Booking.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -300,7 +299,7 @@ app.get('/bookings', async (req, res) => {
         return res.status(401).json({ error: 'Token verification failed' });
       }
 
-      const bookings = await Booking.find({ user: userData.id }).populate('place');
+      const bookings = await BookingModel.find({ user: userData.id }).populate('place');
       res.json(bookings);
     } catch (error) {
       console.error('Error in /bookings (GET) endpoint:', error);
