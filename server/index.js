@@ -32,12 +32,12 @@ const jwtSecret = process.env.JWT_SECRET
 
 const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
-app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
+// app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
 app.use(express.json())
 app.use(cookieParser())
 const PORT = 3000
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://nestify-booking-app.netlify.app/',
   credentials: true,
 }))
 
