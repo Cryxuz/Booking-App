@@ -35,7 +35,7 @@ app.use('/uploads', express.static(uploadsPath));
 // app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
 app.use(express.json())
 app.use(cookieParser())
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 app.use(cors({
   origin: 'https://nestify-booking-app.netlify.app/',
   credentials: true,
@@ -310,4 +310,6 @@ app.get('/bookings', async (req, res) => {
   });
 });
 
-app.listen(PORT)
+app.listen(PORT, () => {
+  console.log('server listening to '+PORT)
+})
