@@ -37,7 +37,7 @@ app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT || 3000
 app.use(cors({
-  origin: 'https://nestify-booking-app.netlify.app/',
+  origin: 'https://nestify-booking-app.netlify.app',
   credentials: true,
 }))
 
