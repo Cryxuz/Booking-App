@@ -14,7 +14,7 @@ import Booking from './pages/Booking'
 import BookingsPage from './pages/BookingsPage'
 
 
-axios.defaults.baseURL = 'http://localhost:3000/uploads/'
+axios.defaults.baseURL = 'http://localhost:3000/'
 
 function App() {
 
