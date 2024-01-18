@@ -1,3 +1,7 @@
 # Booking-App
 
-## Simple Booking App. Please visit https://paul-tan.com/ to view live/recorded.
+### .env
+
+##### MONGO_URL=mongodb+srv://booking:booking@cluster0.2r3xm1q.mongodb.net/?retryWrites=true&w=majority
+
+##### JWT_SECRET=abcdefg
