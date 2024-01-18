@@ -12,7 +12,7 @@ import { dirname } from 'path';
 import multer from 'multer'
 import fs from 'fs'
 import path from 'path'
-import Place from './models/Place.js'
+import Place from './models/place.js'
 import BookingModel from './models/Booking.js'
 
 const __filename = fileURLToPath(import.meta.url);
@@ -106,6 +106,8 @@ app.get('/profile', async (req, res) => {
     res.json(null);
   }
 });
+
+
 
 app.post('/logout', (req, res) => {
 
