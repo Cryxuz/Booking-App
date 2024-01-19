@@ -39,6 +39,7 @@ const PORT = process.env.PORT || 3000
 app.use(cors({
   origin: 'https://nestify-booking-app.netlify.app',
   credentials: true,
+  allowedHeaders: '*',
 }))
 
 mongoose.connect(process.env.MONGO_URL)
