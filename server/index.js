@@ -32,7 +32,6 @@ const jwtSecret = process.env.JWT_SECRET
 
 const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
-// app.use('/uploads', express.static('/Users/cryxuz/Documents/Projects/Booking-App/server/uploads'))
 app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT || 3000
