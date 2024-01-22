@@ -34,18 +34,12 @@ const uploadsPath = path.join(__dirname, 'uploads');
 app.use('/uploads', express.static(uploadsPath));
 app.use(express.json())
 app.use(cookieParser())
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://nestify-booking-app.netlify.app/');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 const PORT = process.env.PORT || 3000
 app.use(cors({
   origin: 'https://nestify-booking-app.netlify.app',
   credentials: true,
   allowedHeaders: ['*'],
-  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+  methods: 'GET, HEAD, PUt, PATCH, POST, DELETE',
   preflightContinue: false
 }))
 
