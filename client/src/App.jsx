@@ -14,7 +14,7 @@ import Booking from './pages/Booking'
 import BookingsPage from './pages/BookingsPage'
 
 
-axios.defaults.baseURL = 'https://mern-booking-app-xauk.onrender.com'
+axios.defaults.baseURL = 'http://localhost:3000'
 
 function App() {
 

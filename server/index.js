@@ -36,7 +36,7 @@ app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT || 3000
 app.use(cors({
-  origin: 'https://nestify-booking-app.netlify.app',
+  origin: 'http://localhost:5173',
   credentials: true,
   allowedHeaders: ['*'],
   methods: 'GET, HEAD, PUt, PATCH, POST, DELETE',
